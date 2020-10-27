@@ -1,0 +1,917 @@
+USE [HHelp]
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_UPDATE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_UPDATE]
+@FNAME AS NVARCHAR(256),
+@LNAME AS NVARCHAR(256),
+@EMAIL AS NVARCHAR(256),
+@MOBILE AS NVARCHAR(256),
+@BDATE AS DATETIME,
+@UID AS INT
+
+AS
+BEGIN
+
+UPDATE UserMst SET FNAME=@FNAME,LNAME=@LNAME,EMAIL=@EMAIL,MOBILE=@MOBILE,BDATE=@BDATE WHERE UID=@UID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_SELECT_BY_UNAME]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_SELECT_BY_UNAME]
+ 
+@UNAME AS NVARCHAR(256)
+AS
+BEGIN
+SELECT * FROM  USERMST WHERE Username=@UNAME
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_SELECT_by_uid]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_SELECT_by_uid]
+@UID AS INT
+
+AS
+BEGIN
+
+SELECT * FROM UserMst WHERE UID=@UID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_SELECT_by_SNAME]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[USERMST_SELECT_by_SNAME]
+@sname as nvarchar(256)
+
+AS
+BEGIN
+
+SELECT * FROM UserMst WHERE SocietyName=@sname
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_SELECT_BY_LOGIN]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_SELECT_BY_LOGIN]
+@UNAME AS NVARCHAR(256),
+@UPASS AS NVARCHAR(256)
+
+AS
+BEGIN
+
+SELECT * FROM UserMst WHERE Username=@UNAME AND Password=@UPASS
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_SELECT_by_HID]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[USERMST_SELECT_by_HID]
+@hid AS INT
+
+AS
+BEGIN
+
+SELECT * FROM UserMst WHERE HouseID=@hid
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_SELECT_BY_EMAIL_AND_mobileno]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_SELECT_BY_EMAIL_AND_mobileno]
+ 
+@EMAIL AS NVARCHAR(256),
+@MOBILE AS NVARCHAR(256)
+AS
+BEGIN
+SELECT * FROM  USERMST WHERE Email=@EMAIL AND Mobile=@MOBILE
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_SELECT_by_email]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_SELECT_by_email]
+@EMAIL  AS NVARCHAR(256)
+
+AS
+BEGIN
+
+SELECT * FROM UserMst WHERE Email=@EMAIL
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_SELECT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_SELECT]
+
+
+AS
+BEGIN
+
+SELECT * FROM UserMst
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_INSERT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_INSERT]
+@FNAME AS NVARCHAR(256),
+@LNAME AS NVARCHAR(256),
+@EMAIL AS NVARCHAR(256),
+@MOBILE AS NVARCHAR(256),
+@BDATE AS DATETIME,
+@HID AS INT,
+@Sname AS nvarchar(256),
+@MEMBER AS INT,
+@UNAME  AS NVARCHAR(256),
+@PASS AS NVARCHAR(256),
+@img as nvarchar(700)
+
+AS
+BEGIN
+
+insert into UserMst values (@FNAME,@LNAME,@EMAIL,@MOBILE,@BDATE,@HID,@Sname,@MEMBER,@UNAME,@PASS,@img,GETDATE())
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_DELETE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_DELETE]
+@UID AS INT
+
+AS
+BEGIN
+
+DELETE  FROM UserMst WHERE UID=@UID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_CHANGE_PICTURE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_CHANGE_PICTURE]
+ @UID AS INT,
+@IMG AS NVARCHAR(500)
+AS
+BEGIN
+UPDATE USERMST SET Image=@IMG WHERE UID=@UID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[USERMST_CHANGE_PASSWORD]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[USERMST_CHANGE_PASSWORD]
+ @UID AS INT,
+@PASS AS NVARCHAR(256)
+AS
+BEGIN
+UPDATE USERMST SET PASSWORD=@PASS WHERE UID=@UID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SOCIETY_Update]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SOCIETY_Update]
+@sid as int,
+@SNAME AS NVARCHAR(256),
+@ADD AS NVARCHAR(256),
+@CITY AS NVARCHAR(256),
+@PIN AS NVARCHAR(256),
+@NOOFHOUSE AS INT
+AS
+BEGIN
+
+UPDATE  SocietyMst SET SNAME=@SNAME,ADDRESS=@ADD,CITY=@CITY,PINCODE=@PIN,NOHOUSE=@NOOFHOUSE,ENTRYDATE=GETDATE() WHERE SID=@SID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SOCIETY_SELECT_TOP10]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SOCIETY_SELECT_TOP10]
+
+
+AS
+BEGIN
+
+SELECT  top 7 *  FROM SocietyMst order by NEWID()
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SOCIETY_SELECT_by_SID]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SOCIETY_SELECT_by_SID]
+
+@SID AS INT
+AS
+BEGIN
+
+SELECT *  FROM SocietyMst WHERE SID=@SID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SOCIETY_SELECT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SOCIETY_SELECT]
+
+
+AS
+BEGIN
+
+SELECT *  FROM SocietyMst
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SOCIETY_INNSERT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SOCIETY_INNSERT]
+
+@SNAME AS NVARCHAR(256),
+@ADD AS NVARCHAR(256),
+@CITY AS NVARCHAR(256),
+@PIN AS NVARCHAR(256),
+@NOOFHOUSE AS INT,
+@img as nvarchar(700)
+AS
+BEGIN
+
+INSERT INTO SocietyMst VALUES(@SNAME,@ADD,@CITY,@PIN,@NOOFHOUSE,@img,GETDATE())
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SOCIETY_DELETE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SOCIETY_DELETE]
+@sid as inT
+AS
+BEGIN
+
+DELETE FROM  SocietyMst WHERE SID=@SID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SELL_UPDATE_SELL]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SELL_UPDATE_SELL]
+@SID AS INT,
+@SELL AS FLOAT
+AS
+BEGIN
+
+UPDATE SELLMST SET SELL=@SELL  WHERE SID=@SID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SELL_SELECT_FOR_USER_SEARCH]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[SELL_SELECT_FOR_USER_SEARCH]
+@sname as nvarchar(256)
+AS
+BEGIN
+
+--SELECT u.FName+ ' ' + u.LName as username, u.Mobile as mobile, s.HID as hid,s.Sname as sname, s.rent as sell, s.UID as uid FROM  RentMst as s,  UserMst as u where s.UID=u.UID 
+ 
+ SELECT h.*,R.* FROM HouseMst AS h, SellMst AS r WHERE H.HID=R.HID and r.Sname=@sname
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SELL_SELECT_FOR_USER]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[SELL_SELECT_FOR_USER]
+AS
+BEGIN
+
+--SELECT u.FName+ ' ' + u.LName as username, u.Mobile as mobile, s.HID as hid,s.Sname as sname, s.rent as sell, s.UID as uid FROM  RentMst as s,  UserMst as u where s.UID=u.UID 
+ 
+ SELECT h.*,R.* FROM HouseMst AS h, SellMst AS r WHERE H.HID=R.HID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SELL_SELECT_FOR_ADMIN]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[SELL_SELECT_FOR_ADMIN]
+AS
+BEGIN
+
+SELECT u.FName+ ' ' + u.LName as username, u.Mobile as mobile, s.HID as hid,s.Sname as sname, s.Sell as sell, s.UID as uid FROM  SELLMST as s,  UserMst as u where s.UID=u.UID 
+ 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SELL_SELECT_BY_UID]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[SELL_SELECT_BY_UID]
+@UID as inT
+AS
+BEGIN
+
+SELECT * FROM  SELLMst WHERE uID=@UID 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SELL_SELECT_BY_SID]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SELL_SELECT_BY_SID]
+@SID as inT
+AS
+BEGIN
+
+SELECT * FROM  SELLMst WHERE SID=@SID 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SELL_SELECT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SELL_SELECT]
+AS
+BEGIN
+
+SELECT * FROM  SELLMST 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SELL_INSERT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SELL_INSERT]
+@HID AS INT,
+@Sname as nvarchar(256),
+@Uid as int,
+ @SELL AS FLOAT
+AS
+BEGIN
+
+INSERT INTO SELLMST VALUES(@HID,@Sname,@Uid,@SELL,GETDATE()) 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[SELL_DELETE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SELL_DELETE]
+@SID as inT
+AS
+BEGIN
+
+DELETE FROM  SELLMST WHERE SID=@SID 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_UPDATE_RENT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RENT_UPDATE_RENT]
+@RID AS INT,
+@RENT AS FLOAT
+AS
+BEGIN
+
+UPDATE RentMst SET Rent=@RENT  WHERE RID=@RID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_FOR_USER_SEARCH]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_FOR_USER_SEARCH]
+@sname as nvarchar(256)
+AS
+BEGIN
+
+--SELECT u.FName+ ' ' + u.LName as username, u.Mobile as mobile, s.HID as hid,s.Sname as sname, s.rent as sell, s.UID as uid FROM  RentMst as s,  UserMst as u where s.UID=u.UID 
+ 
+ SELECT h.*,R.* FROM HouseMst AS h, RentMst AS r WHERE H.HID=R.HID and r.Sname=@sname
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_FOR_USER]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_FOR_USER]
+AS
+BEGIN
+
+--SELECT u.FName+ ' ' + u.LName as username, u.Mobile as mobile, s.HID as hid,s.Sname as sname, s.rent as sell, s.UID as uid FROM  RentMst as s,  UserMst as u where s.UID=u.UID 
+ 
+ SELECT h.*,R.* FROM HouseMst AS h, RentMst AS r WHERE H.HID=R.HID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_FOR_ADMIN]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[RENT_SELECT_FOR_ADMIN]
+AS
+BEGIN
+
+SELECT u.FName+ ' ' + u.LName as username, u.Mobile as mobile, s.HID as hid,s.Sname as sname, s.rent as sell, s.UID as uid FROM  RentMst as s,  UserMst as u where s.UID=u.UID 
+ 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_BY_UID]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RENT_SELECT_BY_UID]
+@UID as inT
+AS
+BEGIN
+
+SELECT * FROM  RentMst WHERE UID=@UID 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT_BY_RID]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RENT_SELECT_BY_RID]
+@RID as inT
+AS
+BEGIN
+
+SELECT * FROM  RentMst WHERE RID=@RID 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_SELECT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RENT_SELECT]
+AS
+BEGIN
+
+SELECT * FROM  RentMst 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_INSERT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RENT_INSERT]
+@HID AS INT,
+@Sname as nvarchar(256),
+@Uid AS int,
+ 
+@RENT AS FLOAT
+AS
+BEGIN
+
+INSERT INTO RentMst VALUES(@HID,@Sname,@Uid ,@RENT,GETDATE()) 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[RENT_DELETE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[RENT_DELETE]
+@RID as inT
+AS
+BEGIN
+
+DELETE FROM  RentMst WHERE RID=@RID 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[MESSAGE_SELECT_BY_TNAME]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[MESSAGE_SELECT_BY_TNAME]
+@TNAME  AS NVARCHAR(256)
+AS
+BEGIN
+
+SELECT * FROM MessageMSt WHERE TONAME=@TNAME
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[MESSAGE_SELECT_BY_MID]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[MESSAGE_SELECT_BY_MID]
+@MID AS INT
+AS
+BEGIN
+
+SELECT * FROM MessageMSt WHERE MID=@MID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[MESSAGE_SELECT_BY_FNAME]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[MESSAGE_SELECT_BY_FNAME]
+@FNAME  AS NVARCHAR(256)
+AS
+BEGIN
+
+SELECT * FROM MessageMSt WHERE FromName=@FNAME
+END
+GO
+/****** Object:  StoredProcedure [dbo].[MESSAGE_SELECT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[MESSAGE_SELECT]
+
+AS
+BEGIN
+
+SELECT * FROM MessageMSt
+END
+GO
+/****** Object:  StoredProcedure [dbo].[MESSAGE_INSERT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[MESSAGE_INSERT]
+@FNAME  AS NVARCHAR(256),
+@TNAME AS NVARCHAR(256),
+@SUB AS NVARCHAR(256),
+@MSG AS NVARCHAR(256)
+AS
+BEGIN
+
+INSERT INTO MessageMSt VALUES(@FNAME,@TNAME,@SUB,@MSG,GETDATE())
+END
+GO
+/****** Object:  StoredProcedure [dbo].[MESSAGE_DELETE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[MESSAGE_DELETE]
+@MID AS INT
+AS
+BEGIN
+
+DELETE FROM MessageMSt WHERE MID=@MID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[COMPLAIN_SOLVED]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[COMPLAIN_SOLVED]
+
+@cid as int,
+@reply as nvarchar(500)
+AS
+BEGIN
+
+update ComplainMst set Reply=@reply,Status='Solved', EntryDate=GETDATE() where CID=@cid
+END
+GO
+/****** Object:  StoredProcedure [dbo].[COMPLAIN_SELECT_for_ADMIN]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[COMPLAIN_SELECT_for_ADMIN]
+
+@status as nvarchar(200)
+AS
+BEGIN
+
+SELECT u.UID as uid, u.FName +' '+u.LName as username,u.SocietyName as societyname,c.* FROM ComplainMst as c, UserMst as u where c.UID=u.UID and c.Status=@status
+
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[COMPLAIN_select_by_uid]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[COMPLAIN_select_by_uid]
+
+@UID AS INT
+
+AS
+BEGIN
+
+select * from   ComplainMst  WHERE UID=@UID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[COMPLAIN_SELECT_BY_CID]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[COMPLAIN_SELECT_BY_CID]
+
+@CID AS INT
+AS
+BEGIN
+
+SELECT * FROM ComplainMst WHERE  CID=@CID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[COMPLAIN_SELECT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[COMPLAIN_SELECT]
+
+
+AS
+BEGIN
+
+SELECT * FROM ComplainMst
+END
+GO
+/****** Object:  StoredProcedure [dbo].[COMPLAIN_INSERT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[COMPLAIN_INSERT]
+
+@UID AS INT,
+@sub AS NVARCHAR(256),
+@comlain AS NVARCHAR(256),
+@reply AS NVARCHAR(256)
+AS
+BEGIN
+
+insert into ComplainMst values(@UID,@sub,@comlain,@reply,'Pending',GETDATE())
+END
+GO
+/****** Object:  StoredProcedure [dbo].[COMPLAIN_DELETE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[COMPLAIN_DELETE]
+
+@CID AS INT
+AS
+BEGIN
+
+DELETE FROM ComplainMst WHERE  CID=@CID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[HOUSE_UPDATE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[HOUSE_UPDATE]
+@HID AS INT,
+@BLOCKNO AS INT,
+@TYPE AS NVARCHAR(256),
+@DETAIL AS NVARCHAR(256),
+@SID AS INT
+
+AS
+BEGIN
+
+UPDATE HouseMst SET BLOCKNO= @BLOCKNO,TYPE=@TYPE,DETAIL=@DETAIL,SID=@SID,EntyDate=GETDATE() WHERE HID=@HID
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[HOUSE_SELECT_FOR_VIEWMORE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[HOUSE_SELECT_FOR_VIEWMORE]
+@uid as int
+AS
+BEGIN
+
+--SELECT u.FName+ ' ' + u.LName as username, u.Mobile as mobile, s.HID as hid,s.Sname as sname, s.rent as sell, s.UID as uid FROM  RentMst as s,  UserMst as u where s.UID=u.UID 
+ 
+-- SELECT * FROM HouseMst
+ --select * from UserMst
+ --select * from SocietyMst 
+ 
+select u.FName +' ' +u.LName as username,u.Email as email, u.Mobile as mobile,u.Image as img, h.*,s.Address as address, s.City as city, s.Pincode as pincode  from UserMst as u, HouseMst as h, SocietyMst as s where u.HouseID=h.HID and h.SName=s.SName and u.UID=@uid
+END
+GO
+/****** Object:  StoredProcedure [dbo].[HOUSE_SELECT_BY_SNAME_FOR_NEW_ADD_HOUSE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[HOUSE_SELECT_BY_SNAME_FOR_NEW_ADD_HOUSE]
+@sname as nvarchar(256)
+
+AS
+BEGIN
+
+SELECT * FROM HouseMst WHERE SName=@sname and blockno not in(select HouseID from UserMst where  SocietyName=@sname)
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[HOUSE_SELECT_BY_SNAME_and_BLOCKNO]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create PROCEDURE [dbo].[HOUSE_SELECT_BY_SNAME_and_BLOCKNO]
+@sname as nvarchar(256),
+@bno as int
+AS
+BEGIN
+
+SELECT * FROM HouseMst WHERE SName=@sname  and BlockNo=@bno 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[HOUSE_SELECT_BY_SNAME]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[HOUSE_SELECT_BY_SNAME]
+@sname as nvarchar(256)
+
+AS
+BEGIN
+
+SELECT * FROM HouseMst WHERE SName=@sname  
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[HOUSE_SELECT_BY_HID]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[HOUSE_SELECT_BY_HID]
+@HID AS INT
+
+AS
+BEGIN
+
+SELECT * FROM HouseMst WHERE HID=@HID 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[HOUSE_SELECT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[HOUSE_SELECT]
+
+
+AS
+BEGIN
+
+SELECT * FROM HouseMst
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[HOUSE_INSERT]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[HOUSE_INSERT]
+@BLOCKNO AS INT,
+@TYPE AS NVARCHAR(256),
+@DETAIL AS NVARCHAR(256),
+@Sname AS NVARCHAR(256),
+@img as nvarchar(500)
+
+AS
+BEGIN
+
+INSERT INTO HouseMst VALUES(@BLOCKNO,@TYPE,@DETAIL,@Sname,@img,GETDATE())
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[HOUSE_DELETE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[HOUSE_DELETE]
+@HID AS INT
+
+AS
+BEGIN
+
+DELETE FROM HouseMst WHERE HID=@HID 
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[HOUSE_CHANGE_IMAGE]    Script Date: 09/01/2017 10:18:51 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[HOUSE_CHANGE_IMAGE]
+
+@HID AS INT,
+@IMG AS NVARCHAR(500)
+AS
+BEGIN
+
+UPDATE  HouseMst SET Image=@IMG WHERE HID=@HID
+
+END
+GO
